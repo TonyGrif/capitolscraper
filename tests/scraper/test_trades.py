@@ -1,5 +1,6 @@
-from scraper.trades import Trades
 import pytest
+
+from scraper.trades import Trades
 
 
 @pytest.fixture
