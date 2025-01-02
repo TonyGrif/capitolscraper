@@ -1,6 +1,7 @@
 """This module contains utility functions for the scraper module"""
 
 from typing import Tuple
+
 import httpx
 from bs4 import BeautifulSoup
 

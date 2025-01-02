@@ -1,5 +1,6 @@
-from utils import make_request, parse_trade_stats
 import pytest
+
+from utils import make_request, parse_trade_stats
 
 
 @pytest.fixture
