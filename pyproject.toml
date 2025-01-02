@@ -1,0 +1,18 @@
+[project]
+name = "capitolscraper"
+version = "0.1"
+description = "Web scraper for capitoltrades.com"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+]
+lint = [
+    "isort>=5.13.2",
+    "pylint>=3.3.3",
+    "ruff>=0.8.5",
+]
