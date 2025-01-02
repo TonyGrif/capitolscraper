@@ -27,7 +27,6 @@
 
       packages = with pkgs; [
         unstable.uv
-        (pkgs.python3.withPackages(ps: [ pkgs.python312Packages.httpx ] ++ pkgs.python312Packages.httpx.optional-dependencies.cli ))
       ];
     };
   };
