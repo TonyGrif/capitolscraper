@@ -25,7 +25,7 @@ class Trades:
 
             data = parse_trade_stats(res.text)
 
-            self._stats = TradesStats(
+            self._stats: TradesStats = TradesStats(
                 int(data[0].replace(",", "")),
                 int(data[1].replace(",", "")),
                 data[2],
