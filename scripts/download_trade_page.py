@@ -1,7 +1,6 @@
 from datetime import datetime
 from pathlib import Path
 
-
 from utils import make_request
 
 

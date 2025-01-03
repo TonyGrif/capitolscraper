@@ -1,7 +1,8 @@
 """This modules contains the capitoltrades scraper for the trades page"""
 
-from .meta import TradesMeta
 from utils import make_request, parse_trade_stats
+
+from .meta import TradesMeta
 
 
 class Trades:
