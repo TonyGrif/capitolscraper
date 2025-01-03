@@ -25,6 +25,7 @@ lint = [
 
 [tool.poe.tasks]
 test = "pytest --cov --cov-report term-missing"
+
 _ruff = "ruff format scraper/ scripts/ tests/ utils/"
 _isort = "isort scraper/ scripts/ tests/ utils/"
 format.sequence = ["_ruff", "_isort"]
@@ -33,7 +34,7 @@ _type = "mypy scraper/ scripts/ utils/"
 _check = "ruff check scraper/ scripts/ utils/"
 _lint = "pylint scraper/ scripts/ utils/"
 
-lint.sequence = ["format", "_check", "_type", "_lint"]
+lint.sequence = ["_type", "_check", "_lint"]
 
 [build-system]
 requires = ["hatchling"]
