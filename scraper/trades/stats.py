@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class TradesMeta:
+class TradesStats:
     """This dataclass is stores capitoltrades trade page stats
 
     Args:

@@ -2,7 +2,7 @@
 
 from utils import make_request, parse_trade_stats
 
-from .meta import TradesMeta
+from .stats import TradesStats
 
 
 class Trades:
@@ -12,10 +12,10 @@ class Trades:
         """Constructor for the Trades class"""
         pass
 
-    def stats(self) -> TradesMeta:
+    def stats(self) -> TradesStats:
         """Return the total stats of trades"""
-        if hasattr(self, "meta"):
-            return self._meta
+        if hasattr(self, "_stats"):
+            return self._stats
         else:
             res = make_request()
 
@@ -25,11 +25,11 @@ class Trades:
 
             data = parse_trade_stats(res.text)
 
-            self._meta = TradesMeta(
+            self._stats = TradesStats(
                 int(data[0].replace(",", "")),
                 int(data[1].replace(",", "")),
                 data[2],
                 int(data[3].replace(",", "")),
                 int(data[4].replace(",", "")),
             )
-            return self._meta
+            return self._stats
