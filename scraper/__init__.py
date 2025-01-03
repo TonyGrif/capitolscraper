@@ -1,3 +1,5 @@
 """This module contains all capitoltrades scrapers"""
 
-__all__ = []
+from .trades import Trades
+
+__all__ = ["Trades"]
