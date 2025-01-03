@@ -11,6 +11,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "poethepoet>=0.32.0",
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
 ]
@@ -21,6 +22,18 @@ lint = [
     "ruff>=0.8.5",
     "types-beautifulsoup4>=4.12.0.20241020",
 ]
+
+[tool.poe.tasks]
+test = "pytest --cov --cov-report term-missing"
+_ruff = "ruff format scraper/ scripts/ tests/ utils/"
+_isort = "isort scraper/ scripts/ tests/ utils/"
+format.sequence = ["_ruff", "_isort"]
+
+_type = "mypy scraper/ scripts/ utils/"
+_check = "ruff check scraper/ scripts/ utils/"
+_lint = "pylint scraper/ scripts/ utils/"
+
+lint.sequence = ["format", "_check", "_type", "_lint"]
 
 [build-system]
 requires = ["hatchling"]
