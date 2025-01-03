@@ -1,5 +1,7 @@
 """This modules contains the capitoltrades scraper for the trades page"""
 
+from typing import Optional
+
 from utils import make_request, parse_trade_stats
 
 from .stats import TradesStats
@@ -10,26 +12,26 @@ class Trades:
 
     def __init__(self) -> None:
         """Constructor for the Trades class"""
-        pass
+        self._stats: Optional[TradesStats] = None
 
     def stats(self) -> TradesStats:
         """Return the total stats of trades"""
-        if hasattr(self, "_stats"):
+        if self._stats is not None:
             return self._stats
-        else:
-            res = make_request()
 
-            # TODO: raise this in function with httpx exceptions
-            if res.status_code != 200:
-                raise ValueError
+        res = make_request()
 
-            data = parse_trade_stats(res.text)
+        # TODO: raise this in function with httpx exceptions
+        if res.status_code != 200:
+            raise ValueError
 
-            self._stats: TradesStats = TradesStats(
-                int(data[0].replace(",", "")),
-                int(data[1].replace(",", "")),
-                data[2],
-                int(data[3].replace(",", "")),
-                int(data[4].replace(",", "")),
-            )
-            return self._stats
+        data = parse_trade_stats(res.text)
+
+        self._stats = TradesStats(
+            int(data[0].replace(",", "")),
+            int(data[1].replace(",", "")),
+            data[2],
+            int(data[3].replace(",", "")),
+            int(data[4].replace(",", "")),
+        )
+        return self._stats
