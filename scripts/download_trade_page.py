@@ -1,3 +1,5 @@
+"""CLI script to download the response from capitoltrades trade page"""
+
 from datetime import datetime
 from pathlib import Path
 
@@ -5,6 +7,7 @@ from utils import make_request
 
 
 def main():
+    """Main function for this module"""
     file_path = "tests/resources"
     file_name = f"{datetime.today().strftime("%m-%d-%Y")}_tradepage.txt"
 
@@ -13,7 +16,7 @@ def main():
 
     res = make_request()
 
-    with open(f"{file_path}/{file_name}", "w") as file:
+    with open(f"{file_path}/{file_name}", "w", encoding="utf-8") as file:
         file.write(res.text)
 
 
