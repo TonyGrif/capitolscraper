@@ -11,6 +11,7 @@ class Trades:
 
     def __init__(self) -> None:
         """Constructor for the Trades class"""
+        self._trades = None
         self._stats: Optional[TradesStats] = None
         self._total_pages: Optional[int] = None
 
