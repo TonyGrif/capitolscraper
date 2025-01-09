@@ -14,7 +14,7 @@ def main():
     if Path(f"{file_path}/{file_name}").exists():
         return
 
-    res = make_request()
+    res = make_request("trade")
 
     with open(f"{file_path}/{file_name}", "w", encoding="utf-8") as file:
         file.write(res.text)

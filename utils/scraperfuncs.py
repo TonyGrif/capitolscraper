@@ -6,10 +6,13 @@ import httpx
 from bs4 import BeautifulSoup
 
 
-def make_request() -> httpx.Response:
-    """Make a request on capitoltrades"""
-    # TODO: modularize to work with other pages
-    return httpx.get("https://www.capitoltrades.com/trades")
+def make_request(page: str) -> httpx.Response:
+    """Make a request on capitoltrades
+
+    Args:
+        page: The page to make a request on, valid options are: \"trades\"
+    """
+    return httpx.get(f"https://www.capitoltrades.com/{page}")
 
 
 def parse_trade_stats(text: str) -> Tuple[str, str, str, str, str]:
