@@ -5,6 +5,8 @@ from typing import Tuple
 import httpx
 from bs4 import BeautifulSoup
 
+from .dataclasses import PageData
+
 
 def make_request(page: str) -> httpx.Response:
     """Make a request on capitoltrades
@@ -20,8 +22,8 @@ def make_request(page: str) -> httpx.Response:
     return res
 
 
-def parse_page_data(text: str) -> Tuple[int, ...]:
-    """Parse the page for table number stats."""
+def parse_page_data(text: str) -> PageData:
+    """Parse the page for page specific data"""
     soup = BeautifulSoup(text, "html.parser")
 
     elem = soup.find(
@@ -32,7 +34,7 @@ def parse_page_data(text: str) -> Tuple[int, ...]:
     nums = elem.find_all("b")  # type: ignore
 
     data = [int(num.text) for num in nums]
-    return tuple(data)
+    return PageData(*data)
 
 
 def parse_trade_stats(text: str) -> Tuple[str, str, str, str, str]:
