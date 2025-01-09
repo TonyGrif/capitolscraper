@@ -24,8 +24,8 @@ def test_parse_page_data(tradepage):
     with open(tradepage, "r") as f:
         data = parse_page_data(str(f.readlines()))
 
-        assert data[0] == 1
-        assert data[1] == 2983
+        assert data.current == 1
+        assert data.total == 2983
 
 
 def test_parse_trade_stats(tradepage):
