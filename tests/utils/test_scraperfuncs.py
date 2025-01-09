@@ -31,10 +31,9 @@ def test_parse_page_data(tradepage):
 def test_parse_trade_stats(tradepage):
     with open(tradepage, "r") as f:
         data = parse_trade_stats(str(f.readlines()))
-        assert len(data) == 5
 
-        assert data[0] == "35,791"
-        assert data[1] == "1,743"
-        assert data[2] == "$2.161B"
-        assert data[3] == "204"
-        assert data[4] == "3,147"
+        assert data.trades == 35791
+        assert data.filings == 1743
+        assert data.volume == "$2.161B"
+        assert data.politicians == 204
+        assert data.issuers == 3147

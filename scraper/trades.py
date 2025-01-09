@@ -3,8 +3,7 @@
 from typing import Optional
 
 from utils import make_request, parse_trade_stats
-
-from .stats import TradesStats
+from utils.dataclasses import TradesStats
 
 
 class Trades:
@@ -20,13 +19,5 @@ class Trades:
             return self._stats
 
         res = make_request("trades")
-        data = parse_trade_stats(res.text)
-
-        self._stats = TradesStats(
-            int(data[0].replace(",", "")),
-            int(data[1].replace(",", "")),
-            data[2],
-            int(data[3].replace(",", "")),
-            int(data[4].replace(",", "")),
-        )
+        self._stats = parse_trade_stats(res.text)
         return self._stats
