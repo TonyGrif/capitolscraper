@@ -9,6 +9,14 @@ def trades():
 
 
 class TestTrades:
+    def test_trades(self, trades):
+        trade_collection = trades.trades
+
+        assert len(trade_collection) == 12
+        assert trade_collection[0].politician is not None
+
+        assert trade_collection == trades.trades
+
     def test_stats(self, trades):
         first_stats = trades.stats
         assert first_stats.trades is not None

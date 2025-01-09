@@ -1,9 +1,10 @@
 """This modules contains the capitoltrades scraper for the trades page"""
 
-from typing import Optional
+from typing import List, Optional
 
-from utils import make_request, parse_page_data, parse_trade_stats
-from utils.dataclasses import TradesStats
+from utils import (make_request, parse_page_data, parse_trade_page,
+                   parse_trade_stats)
+from utils.dataclasses import Trade, TradesStats
 
 
 class Trades:
@@ -11,9 +12,20 @@ class Trades:
 
     def __init__(self) -> None:
         """Constructor for the Trades class"""
-        self._trades = None
+        self._trades: Optional[List[Trade]] = None
         self._stats: Optional[TradesStats] = None
         self._total_pages: Optional[int] = None
+
+    @property
+    def trades(self) -> List[Trade]:
+        """Return the total available trades"""
+        if self._trades is not None:
+            return self._trades
+
+        # TODO: Scrape all site not just one page
+        res = make_request("trades")
+        self._trades = parse_trade_page(res.text)
+        return self._trades
 
     @property
     def stats(self) -> TradesStats:
