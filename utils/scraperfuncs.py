@@ -1,11 +1,9 @@
 """This module contains utility functions for the scraper module"""
 
-from typing import Tuple
-
 import httpx
 from bs4 import BeautifulSoup
 
-from .dataclasses import PageData
+from .dataclasses import PageData, TradesStats
 
 
 def make_request(page: str) -> httpx.Response:
@@ -37,7 +35,7 @@ def parse_page_data(text: str) -> PageData:
     return PageData(*data)
 
 
-def parse_trade_stats(text: str) -> Tuple[str, str, str, str, str]:
+def parse_trade_stats(text: str) -> TradesStats:
     """Parse the page for trade stats"""
     soup = BeautifulSoup(text, "html.parser")
 
@@ -46,8 +44,11 @@ def parse_trade_stats(text: str) -> Tuple[str, str, str, str, str]:
         {"class": "text-size-5 font-medium leading-6 text-txt"},
     )
 
-    vals = []
-    for elem in elems:
-        vals.append(elem.text)
-
-    return tuple(vals)
+    data = [elem.text for elem in elems]
+    return TradesStats(
+        int(data[0].replace(",", "")),
+        int(data[1].replace(",", "")),
+        data[2],
+        int(data[3].replace(",", "")),
+        int(data[4].replace(",", "")),
+    )

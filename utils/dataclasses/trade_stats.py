@@ -1,4 +1,4 @@
-"""This module contains the TradesMeta class"""
+"""This module contains the TradesStats class"""
 
 from dataclasses import dataclass
 
