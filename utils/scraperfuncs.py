@@ -5,9 +5,7 @@ from typing import List
 import httpx
 from bs4 import BeautifulSoup
 
-from utils.dataclasses.trade import Politician
-
-from .dataclasses import PageData, Trade, TradesStats
+from .dataclasses import PageData, Politician, Trade, TradesStats
 
 
 def make_request(page: str) -> httpx.Response:
