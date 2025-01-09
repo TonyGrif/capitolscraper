@@ -16,7 +16,6 @@ dev = [
     "pytest-cov>=6.0.0",
 ]
 lint = [
-    "isort>=5.13.2",
     "mypy>=1.14.1",
     "pylint>=3.3.3",
     "ruff>=0.8.5",
@@ -26,9 +25,9 @@ lint = [
 [tool.poe.tasks]
 test = "pytest --cov --cov-report term-missing"
 
-_ruff = "ruff format scraper/ scripts/ tests/ utils/"
-_isort = "isort scraper/ scripts/ tests/ utils/"
-format.sequence = ["_ruff", "_isort"]
+_imports = "ruff check --select I --fix ."
+_format = "ruff format scraper/ scripts/ tests/ utils/"
+format.sequence = ["_imports", "_format"]
 
 _type = "mypy scraper/ scripts/ utils/"
 _check = "ruff check scraper/ scripts/ utils/"
