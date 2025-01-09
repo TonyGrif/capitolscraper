@@ -11,8 +11,13 @@ def make_request(page: str) -> httpx.Response:
 
     Args:
         page: The page to make a request on, valid options are: \"trades\"
+
+    Raises:
+        HTTPStatusError on unsuccessful status code
     """
-    return httpx.get(f"https://www.capitoltrades.com/{page}")
+    res = httpx.get(f"https://www.capitoltrades.com/{page}")
+    res.raise_for_status()
+    return res
 
 
 def parse_trade_stats(text: str) -> Tuple[str, str, str, str, str]:

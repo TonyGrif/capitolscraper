@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import httpx
 import pytest
 
 from utils import make_request, parse_trade_stats
@@ -14,6 +15,9 @@ def test_make_request():
     res = make_request("trades")
     assert res.status_code == 200
     assert res.text is not None
+
+    with pytest.raises(httpx.HTTPStatusError):
+        res = make_request("notreal")
 
 
 def test_parse_trade_stats(tradepage):
