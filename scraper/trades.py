@@ -2,8 +2,7 @@
 
 from typing import List, Optional
 
-from utils import (make_request, parse_page_data, parse_trade_page,
-                   parse_trade_stats)
+from utils import make_request, parse_page_data, parse_trade_page, parse_trade_stats
 from utils.dataclasses import Trade, TradesStats
 
 
