@@ -3,7 +3,8 @@ from pathlib import Path
 import httpx
 import pytest
 
-from utils import make_request, parse_page_data, parse_trade_stats
+from utils import (make_request, parse_page_data, parse_trade_page,
+                   parse_trade_stats)
 
 
 @pytest.fixture
@@ -18,6 +19,19 @@ def test_make_request():
 
     with pytest.raises(httpx.HTTPStatusError):
         res = make_request("notreal")
+
+
+def test_parse_trade_page(tradepage):
+    with open(tradepage, "r") as f:
+        data = parse_trade_page(str(f.readlines()))
+
+        assert len(data) == 12
+        recent = data[0].politician
+
+        assert recent.name == "Tom Carper"
+        assert recent.party == "Democrat"
+        assert recent.chamber == "Senate"
+        assert recent.state == "DE"
 
 
 def test_parse_page_data(tradepage):
