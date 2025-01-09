@@ -20,6 +20,21 @@ def make_request(page: str) -> httpx.Response:
     return res
 
 
+def parse_page_data(text: str) -> Tuple[int, ...]:
+    """Parse the page for table number stats."""
+    soup = BeautifulSoup(text, "html.parser")
+
+    elem = soup.find(
+        "p",
+        {"class": "hidden leading-7 sm:block"},
+    )
+
+    nums = elem.find_all("b")  # type: ignore
+
+    data = [int(num.text) for num in nums]
+    return tuple(data)
+
+
 def parse_trade_stats(text: str) -> Tuple[str, str, str, str, str]:
     """Parse the page for trade stats"""
     soup = BeautifulSoup(text, "html.parser")

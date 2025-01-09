@@ -4,6 +4,7 @@ import httpx
 import pytest
 
 from utils import make_request, parse_trade_stats
+from utils.scraperfuncs import parse_page_data
 
 
 @pytest.fixture
@@ -18,6 +19,14 @@ def test_make_request():
 
     with pytest.raises(httpx.HTTPStatusError):
         res = make_request("notreal")
+
+
+def test_parse_page_data(tradepage):
+    with open(tradepage, "r") as f:
+        data = parse_page_data(str(f.readlines()))
+
+        assert data[0] == 1
+        assert data[1] == 2983
 
 
 def test_parse_trade_stats(tradepage):
