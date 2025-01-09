@@ -19,7 +19,7 @@ class Trades:
         if self._stats is not None:
             return self._stats
 
-        res = make_request()
+        res = make_request("trades")
 
         # TODO: raise this in function with httpx exceptions
         if res.status_code != 200:
