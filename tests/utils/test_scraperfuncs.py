@@ -3,8 +3,7 @@ from pathlib import Path
 import httpx
 import pytest
 
-from utils import make_request, parse_trade_stats
-from utils.scraperfuncs import parse_page_data
+from utils import make_request, parse_page_data, parse_trade_stats
 
 
 @pytest.fixture
