@@ -2,6 +2,8 @@
 
 from dataclasses import dataclass
 
+from .traded_issuer import IssuedTrader
+
 
 @dataclass
 class Politician:
@@ -29,3 +31,4 @@ class Trade:
     """
 
     politician: Politician
+    issuer: IssuedTrader

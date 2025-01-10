@@ -14,6 +14,7 @@ class TestTrades:
 
         assert len(trade_collection) == 12
         assert trade_collection[0].politician is not None
+        assert trade_collection[0].issuer is not None
 
         assert trade_collection == trades.trades
 
