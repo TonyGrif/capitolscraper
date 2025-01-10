@@ -5,7 +5,7 @@ from typing import List
 import httpx
 from bs4 import BeautifulSoup
 
-from .dataclasses import PageData, Politician, Trade, TradesStats
+from .dataclasses import IssuedTrader, PageData, Politician, Trade, TradesStats
 
 
 def make_request(page: str) -> httpx.Response:
@@ -41,7 +41,12 @@ def _parse_trade(trade) -> Trade:
         {"class": "q-cell cell--politician has-avatar"},
     )
 
-    return Trade(_parse_politician(pol_block.text))
+    issuer_block = trade.find(
+        "div",
+        {"class": "q-fieldset issuer-info"},
+    )
+
+    return Trade(_parse_politician(pol_block.text), _parse_issuer(issuer_block))
 
 
 def _parse_politician(text: str) -> Politician:
@@ -63,6 +68,12 @@ def _parse_politician(text: str) -> Politician:
         text = text.replace("Senate", "")
 
     return Politician(text[0:-2].strip(), party, chamber, text[-2:])
+
+
+def _parse_issuer(block) -> IssuedTrader:
+    name = block.find("h3").text
+    symbol = block.find("span").text
+    return IssuedTrader(name, symbol)
 
 
 def parse_page_data(text: str) -> PageData:

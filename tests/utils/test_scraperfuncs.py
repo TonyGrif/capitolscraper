@@ -25,12 +25,16 @@ def test_parse_trade_page(tradepage):
         data = parse_trade_page(str(f.readlines()))
 
         assert len(data) == 12
-        recent = data[0].politician
+        pol = data[0].politician
 
-        assert recent.name == "Tom Carper"
-        assert recent.party == "Democrat"
-        assert recent.chamber == "Senate"
-        assert recent.state == "DE"
+        assert pol.name == "Tom Carper"
+        assert pol.party == "Democrat"
+        assert pol.chamber == "Senate"
+        assert pol.state == "DE"
+
+        issuer = data[0].issuer
+        assert issuer.name == "Atlantica Sustainable Infrastructure PLC"
+        assert issuer.symbol == "AY:US"
 
 
 def test_parse_page_data(tradepage):
