@@ -9,7 +9,7 @@ from utils import make_request
 def main():
     """Main function for this module"""
     file_path = "tests/resources"
-    file_name = f"{datetime.today().strftime("%m-%d-%Y")}_tradepage.txt"
+    file_name = f"{datetime.today().strftime('%m-%d-%Y')}_tradepage.txt"
 
     if Path(f"{file_path}/{file_name}").exists():
         return

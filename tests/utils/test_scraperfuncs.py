@@ -5,19 +5,22 @@ import pytest
 
 from utils import make_request, parse_page_data, parse_trade_page, parse_trade_stats
 
+pytest_plugins = ("pytest_asyncio",)
+
 
 @pytest.fixture
 def tradepage():
     return Path("tests/resources/01-02-2025_tradepage.txt")
 
 
-def test_make_request():
-    res = make_request("trades")
+@pytest.mark.asyncio
+async def test_make_request():
+    res = await make_request("trades")
     assert res.status_code == 200
     assert res.text is not None
 
     with pytest.raises(httpx.HTTPStatusError):
-        res = make_request("notreal")
+        res = await make_request("notreal")
 
 
 def test_parse_trade_page(tradepage):
