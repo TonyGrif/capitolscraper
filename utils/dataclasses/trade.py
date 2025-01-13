@@ -47,6 +47,7 @@ class Trade:
         dates: Dates associated with this trade
         owner: The owner of this trade move
         action: The action of this trade (buy, sell, exchange)
+        size: The estimated size of this trade
     """
 
     politician: Politician
@@ -54,3 +55,4 @@ class Trade:
     dates: Dates
     owner: str
     action: str
+    size: str

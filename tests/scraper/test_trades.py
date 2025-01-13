@@ -18,6 +18,7 @@ class TestTrades:
         assert trade_collection[0].dates is not None
         assert trade_collection[0].owner is not None
         assert trade_collection[0].action is not None
+        assert trade_collection[0].size is not None
 
         assert trade_collection == trades.trades
 
