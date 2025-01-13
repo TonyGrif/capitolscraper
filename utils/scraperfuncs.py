@@ -45,6 +45,7 @@ def _parse_trade(trade) -> Trade:
         data[5].text,
         data[6].text.capitalize(),
         data[7].text.replace("–", "-"),
+        None if data[8].text == "N/A" else float(data[8].text[1:].replace(",", "")),
     )
 
 

@@ -44,6 +44,9 @@ def test_parse_trade_page(tradepage):
         assert data[0].owner == "Spouse"
         assert data[0].action == "Sell"
         assert data[0].size == "1K-15K"
+        assert data[0].price is None
+
+        assert data[1].price == 0.14
 
 
 def test_parse_page_data(tradepage):
