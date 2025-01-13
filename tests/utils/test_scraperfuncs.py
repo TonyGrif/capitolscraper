@@ -41,6 +41,8 @@ def test_parse_trade_page(tradepage):
         assert dates.traded is not None
         assert dates.filed_after == 20
 
+        assert data[0].owner == "Spouse"
+
 
 def test_parse_page_data(tradepage):
     with open(tradepage, "r") as f:

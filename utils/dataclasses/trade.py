@@ -45,8 +45,10 @@ class Trade:
         politician: A dataclass of politician data
         issuer: The issuer of this trade
         dates: Dates associated with this trade
+        owner: The owner of this trade move
     """
 
     politician: Politician
     issuer: IssuedTrader
     dates: Dates
+    owner: str

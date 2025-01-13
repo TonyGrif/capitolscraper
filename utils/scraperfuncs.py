@@ -39,7 +39,10 @@ def _parse_trade(trade) -> Trade:
     )
 
     return Trade(
-        _parse_politician(data[0].text), _parse_issuer(data[1]), _parse_dates(data[2:5])
+        _parse_politician(data[0].text),
+        _parse_issuer(data[1]),
+        _parse_dates(data[2:5]),
+        data[5].text,
     )
 
 
