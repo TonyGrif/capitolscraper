@@ -23,12 +23,30 @@ class Politician:
 
 
 @dataclass
+class Dates:
+    """Contains data pertaining to a trade's dates
+
+    Args:
+        published: When the trade was published
+        traded: The data this trade was executed
+        filed_after: How long this trade was published from when it was executed
+    """
+
+    published: str
+    traded: str
+    filed_after: int
+
+
+@dataclass
 class Trade:
     """Contains data pertaining to a single trade
 
     Args:
         politician: A dataclass of politician data
+        issuer: The issuer of this trade
+        dates: Dates associated with this trade
     """
 
     politician: Politician
     issuer: IssuedTrader
+    dates: Dates
