@@ -28,12 +28,9 @@ def parse_trade_page(text: str) -> List[Trade]:
     soup = BeautifulSoup(text, "html.parser")
     trades = soup.find_all(
         "tr",
-        {
-            "class": "border-b transition-colors hover:bg-neutral-100/50 data-[state=selected]:bg-neutral-100 dark:hover:bg-neutral-800/50 dark:data-[state=selected]:bg-neutral-800 h-14 border-primary-15"
-        },
     )
 
-    return [_parse_trade(trade) for trade in trades]
+    return [_parse_trade(trade) for trade in trades[1:]]
 
 
 def _parse_trade(trade) -> Trade:
