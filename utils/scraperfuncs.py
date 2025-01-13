@@ -1,11 +1,12 @@
 """This module contains utility functions for the scraper module"""
 
+from datetime import datetime, timedelta
 from typing import List
 
 import httpx
 from bs4 import BeautifulSoup
 
-from .dataclasses import IssuedTrader, PageData, Politician, Trade, TradesStats
+from .dataclasses import Dates, IssuedTrader, PageData, Politician, Trade, TradesStats
 
 
 def make_request(page: str) -> httpx.Response:
@@ -36,17 +37,13 @@ def parse_trade_page(text: str) -> List[Trade]:
 
 
 def _parse_trade(trade) -> Trade:
-    pol_block = trade.find(
-        "div",
-        {"class": "q-cell cell--politician has-avatar"},
+    data = trade.find_all(
+        "td", {"class": "align-middle [&:has([role=checkbox])]:pr-0 p-0"}
     )
 
-    issuer_block = trade.find(
-        "div",
-        {"class": "q-fieldset issuer-info"},
+    return Trade(
+        _parse_politician(data[0].text), _parse_issuer(data[1]), _parse_dates(data[2:5])
     )
-
-    return Trade(_parse_politician(pol_block.text), _parse_issuer(issuer_block))
 
 
 def _parse_politician(text: str) -> Politician:
@@ -74,6 +71,28 @@ def _parse_issuer(block) -> IssuedTrader:
     name = block.find("h3").text
     symbol = block.find("span").text
     return IssuedTrader(name, symbol)
+
+
+def _parse_dates(trades: List) -> Dates:
+    data: List[str] = []
+    for dates in trades[:2]:
+        if "Today" in dates.text:
+            data.append(datetime.today().strftime("%Y-%m-%d"))
+        elif "Yesterday" in dates.text:
+            data.append((datetime.today() - timedelta(1)).strftime("%Y-%m-%d"))
+        else:
+            day_month = dates.find("div", {"class": "text-size-3 font-medium"}).text
+            year = dates.find("div", {"class": "text-size-2 text-txt-dimmer"}).text
+            data.append(
+                datetime.strptime(" ".join([day_month, year]), "%d %b %Y").strftime(
+                    "%Y-%m-%d"
+                )
+            )
+    return Dates(
+        data[0],
+        data[1],
+        int(trades[2].find("div", {"class": "q-value leading-snug"}).text),
+    )
 
 
 def parse_page_data(text: str) -> PageData:
