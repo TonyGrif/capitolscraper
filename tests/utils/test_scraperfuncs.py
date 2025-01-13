@@ -21,7 +21,7 @@ def test_make_request():
 
 
 def test_parse_trade_page(tradepage):
-    with open(tradepage, "r") as f:
+    with open(tradepage, "r", encoding="utf-8") as f:
         data = parse_trade_page(str(f.readlines()))
 
         assert len(data) == 12
@@ -50,7 +50,7 @@ def test_parse_trade_page(tradepage):
 
 
 def test_parse_page_data(tradepage):
-    with open(tradepage, "r") as f:
+    with open(tradepage, "r", encoding="utf-8") as f:
         data = parse_page_data(str(f.readlines()))
 
         assert data.current == 1
@@ -58,7 +58,7 @@ def test_parse_page_data(tradepage):
 
 
 def test_parse_trade_stats(tradepage):
-    with open(tradepage, "r") as f:
+    with open(tradepage, "r", encoding="utf-8") as f:
         data = parse_trade_stats(str(f.readlines()))
 
         assert data.trades == 35791
