@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 from .dataclasses import Dates, IssuedTrader, PageData, Politician, Trade, TradesStats
 
 
-def make_request(page: str, page_num: int = 1) -> httpx.Response:
+async def make_request(page: str, page_num: int = 1) -> httpx.Response:
     """Make a request on capitoltrades
 
     Args:
@@ -19,9 +19,15 @@ def make_request(page: str, page_num: int = 1) -> httpx.Response:
     Raises:
         HTTPStatusError on unsuccessful status code
     """
-    res = httpx.get(f"https://www.capitoltrades.com/{page}?page={page_num}")
-    res.raise_for_status()
-    return res
+    async with httpx.AsyncClient(
+        transport=httpx.AsyncHTTPTransport(retries=3),
+        timeout=10,
+    ) as client:
+        res = await client.get(
+            f"https://www.capitoltrades.com/{page}?page={page_num}&pageSize=96"
+        )
+        res.raise_for_status()
+        return res
 
 
 def parse_trade_page(text: str) -> List[Trade]:
@@ -86,6 +92,8 @@ def _parse_dates(trades: List) -> Dates:
             data.append((datetime.today() - timedelta(1)).strftime("%Y-%m-%d"))
         else:
             day_month = dates.find("div", {"class": "text-size-3 font-medium"}).text
+            if "Sept" in day_month:
+                day_month = day_month.replace("Sept", "Sep")
             year = dates.find("div", {"class": "text-size-2 text-txt-dimmer"}).text
             data.append(
                 datetime.strptime(" ".join([day_month, year]), "%d %b %Y").strftime(
