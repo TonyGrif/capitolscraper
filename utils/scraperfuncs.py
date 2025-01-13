@@ -9,16 +9,17 @@ from bs4 import BeautifulSoup
 from .dataclasses import Dates, IssuedTrader, PageData, Politician, Trade, TradesStats
 
 
-def make_request(page: str) -> httpx.Response:
+def make_request(page: str, page_num: int = 1) -> httpx.Response:
     """Make a request on capitoltrades
 
     Args:
         page: The page to make a request on, valid options are: \"trades\"
+        page_num: The specific page to make a request on
 
     Raises:
         HTTPStatusError on unsuccessful status code
     """
-    res = httpx.get(f"https://www.capitoltrades.com/{page}")
+    res = httpx.get(f"https://www.capitoltrades.com/{page}?page={page_num}")
     res.raise_for_status()
     return res
 
