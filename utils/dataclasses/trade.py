@@ -1,6 +1,7 @@
 """This module contains a Trade dataclass"""
 
 from dataclasses import dataclass
+from typing import Optional
 
 from .traded_issuer import IssuedTrader
 
@@ -48,6 +49,7 @@ class Trade:
         owner: The owner of this trade move
         action: The action of this trade (buy, sell, exchange)
         size: The estimated size of this trade
+        price: The price this trade was executed at
     """
 
     politician: Politician
@@ -56,3 +58,4 @@ class Trade:
     owner: str
     action: str
     size: str
+    price: Optional[float]
