@@ -44,6 +44,7 @@ def _parse_trade(trade) -> Trade:
         _parse_dates(data[2:5]),
         data[5].text,
         data[6].text.capitalize(),
+        data[7].text.replace("–", "-"),
     )
 
 
