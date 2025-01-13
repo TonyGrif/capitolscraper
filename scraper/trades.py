@@ -21,9 +21,12 @@ class Trades:
         if self._trades is not None:
             return self._trades
 
-        # TODO: Scrape all site not just one page
-        res = make_request("trades")
-        self._trades = parse_trade_page(res.text)
+        self._trades = []
+        # TODO: Remove limit, run async/threaded
+        for page in range(1, 50):
+            res = make_request("trades", page)
+
+            self._trades.extend(parse_trade_page(res.text))
         return self._trades
 
     @property
