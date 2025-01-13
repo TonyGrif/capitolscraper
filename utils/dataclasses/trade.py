@@ -46,9 +46,11 @@ class Trade:
         issuer: The issuer of this trade
         dates: Dates associated with this trade
         owner: The owner of this trade move
+        action: The action of this trade (buy, sell, exchange)
     """
 
     politician: Politician
     issuer: IssuedTrader
     dates: Dates
     owner: str
+    action: str
