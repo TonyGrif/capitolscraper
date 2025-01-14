@@ -10,7 +10,7 @@ from .dataclasses import Dates, IssuedTrader, PageData, Politician, Trade, Trade
 
 
 async def make_request(page: str, page_num: int = 1) -> httpx.Response:
-    """Make a request on capitoltrades
+    """Make an async request on capitoltrades
 
     Args:
         page: The page to make a request on, valid options are: \"trades\"
