@@ -8,10 +8,20 @@ from .utils.dataclasses import Trade, TradesStats
 
 
 class Trades:
-    """Class responsible for scraping the capitoltrades trade page"""
+    """Class responsible for scraping the capitoltrades trade page
+
+    Attributes:
+        trades: The collection of trades to be scraped for
+        stats: The stats for capitoltrades
+        total_pages: The total number of pages
+    """
 
     def __init__(self, page_count: Optional[int] = None) -> None:
-        """Constructor for the Trades class"""
+        """Constructor for the Trades class
+
+        Args:
+            page_count: The optional number of pages to scrape
+        """
 
         self._trades: Optional[List[Trade]] = None
         self._stats: Optional[TradesStats] = None
