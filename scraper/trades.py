@@ -1,10 +1,10 @@
-"""This modules contains the capitoltrades scraper for the trades page"""
+"""This modules contains the scraper for the trades page"""
 
 import asyncio
 from typing import List, Optional
 
-from utils import make_request, parse_page_data, parse_trade_page, parse_trade_stats
-from utils.dataclasses import Trade, TradesStats
+from .utils import make_request, parse_page_data, parse_trade_page, parse_trade_stats
+from .utils.dataclasses import Trade, TradesStats
 
 
 class Trades:

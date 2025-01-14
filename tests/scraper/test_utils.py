@@ -3,7 +3,12 @@ from pathlib import Path
 import httpx
 import pytest
 
-from utils import make_request, parse_page_data, parse_trade_page, parse_trade_stats
+from scraper.utils import (
+    make_request,
+    parse_page_data,
+    parse_trade_page,
+    parse_trade_stats,
+)
 
 pytest_plugins = ("pytest_asyncio",)
 
