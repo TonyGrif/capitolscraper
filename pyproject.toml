@@ -26,12 +26,12 @@ lint = [
 [tool.poe.tasks]
 test = "pytest --cov --cov-report term-missing"
 
-_imports = "ruff check --select I --fix scraper/ scripts/ tests/ utils/"
-_format = "ruff format scraper/ scripts/ tests/ utils/"
+_imports = "ruff check --select I --fix ."
+_format = "ruff format ."
 format.sequence = ["_imports", "_format"]
 
-_type = "mypy scraper/ scripts/ utils/"
-_check = "ruff check scraper/ scripts/ utils/"
+_type = "mypy ."
+_check = "ruff check ."
 _lint = "pylint scraper/ scripts/ utils/"
 
 lint.sequence = ["_type", "_check", "_lint"]
