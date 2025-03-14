@@ -3,7 +3,7 @@ from pathlib import Path
 import httpx
 import pytest
 
-from scraper.utils import (
+from capitolscraper.utils import (
     make_request,
     parse_page_data,
     parse_trade_page,

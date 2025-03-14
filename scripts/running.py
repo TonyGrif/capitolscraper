@@ -2,7 +2,7 @@
 
 import asyncio
 
-from scraper import Trades
+from capitolscraper import Trades
 
 trades = Trades()
 
