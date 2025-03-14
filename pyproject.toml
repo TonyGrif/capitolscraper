@@ -1,6 +1,6 @@
 [project]
 name = "capitolscraper"
-version = "0.1"
+version = "0.0.1"
 description = "Web scraper for capitoltrades.com"
 readme = "README.md"
 requires-python = ">=3.9"
