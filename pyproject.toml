@@ -32,7 +32,7 @@ format.sequence = ["_imports", "_format"]
 
 _type = "mypy ."
 _check = "ruff check ."
-_lint = "pylint scraper/"
+_lint = "pylint capitolscraper/"
 
 lint.sequence = ["_type", "_check", "_lint"]
 
