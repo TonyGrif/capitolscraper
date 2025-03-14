@@ -1,6 +1,6 @@
 import pytest
 
-from scraper import Trades
+from capitolscraper import Trades
 
 pytest_plugins = ("pytest_asyncio",)
 
